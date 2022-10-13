@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from django.forms import ValidationError
 from teacher.models import Teacher, Class
 
 class TeacherSerializer(serializers.ModelSerializer):
@@ -11,9 +12,9 @@ class SaveClassSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=100)
     email = serializers.EmailField(max_length=255)
 
-    def validate_nome(self, value):
+    def validate_name(self, value):
         if len(value) < 3:
-            raise ValidationError("Deve ter pelo menos três caracteres")
+            raise ValidationError("deve ter pelo menos três caracteres")
         return value
 
 
